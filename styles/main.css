@@ -6,7 +6,7 @@ table {
 
 }
 td {
-    border: solid black;
+    
     height:50px;
     width: 50px;
     max-height: 100px;
@@ -17,10 +17,6 @@ td {
 }
 .whiteSquare {
     background-color: white;
-}
-
-.clickedCell {
-    background-color: blue;
 }
 
 .opponentPiece ,.playerPiece {
