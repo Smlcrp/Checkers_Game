@@ -14,6 +14,7 @@ let moveFinished = true;
 
 let currentIndex;
 
+
 // this is my click event that allows you to select/deselect/move game pieces on your specific turn
 
 cells.forEach((cell, index) => {
@@ -32,6 +33,16 @@ cells.forEach((cell, index) => {
                 moveFinished = true;
                 turn = "black";
                 console.log(index)
+            }else if(isValidPlayerJump(currentIndex, index)){
+                cell.classList.add("playerPiece");
+                if(cells[currentIndex - 9].classList == "greenSquare opponentPiece") {
+                    cells[currentIndex - 9].classList.remove("opponentPiece") 
+                }else if(cells[currentIndex - 7].classList == "greenSquare opponentPiece") {
+                    cells[currentIndex - 7].classList.remove("opponentPiece")
+                }
+                console.log(true);
+                moveFinished = true;
+                turn = "black";
             }else if(sameSquare(currentIndex, index)) {
                 cell.classList.add("playerPiece")
                 moveFinished = true;
@@ -51,6 +62,16 @@ cells.forEach((cell, index) => {
             cell.classList.add("opponentPiece") 
                 moveFinished = true;
                 turn = "red";
+            }else if(isValidOpponentJump(currentIndex, index)){
+                cell.classList.add("opponentPiece");
+                if(cells[currentIndex + 9].classList == "greenSquare playerPiece") {
+                    cells[currentIndex + 9].classList.remove("playerPiece") 
+                }else if(cells[currentIndex + 7].classList == "greenSquare playerPiece") {
+                    cells[currentIndex + 7].classList.remove("playerPiece")
+                }
+                console.log(true);
+                moveFinished = true;
+                turn = "red";
             }else if(sameSquare(currentIndex, index)) {
                 cell.classList.add("opponentPiece")
                 moveFinished = true;
@@ -64,7 +85,6 @@ cells.forEach((cell, index) => {
            //this function limits the spaces the red game pieces can move to to the green spaces diagonally in front of it 
 function isValidPlayerMove(currentIndex, index) {
     if((currentIndex - index === 7 && cells[index].classList.value !== "greenSquare playerPiece") || (currentIndex - index === 9 && cells[index].classList.value !== "greenSquare playerPiece")) {
-        // if(cells[index].classList.value == "greenSquare opponentPiece")
         console.log(true);
         return true;
     }
@@ -85,83 +105,22 @@ function isValidOpponentMove(currentIndex, index) {
             //this function allows you to deselect the selected game piece and select a new game piece
 function sameSquare(currentIndex, index) {
     if(currentIndex === index) {
-        console.log(true);
+        // console.log(true);
         return true; 
     }
 }
-       
 
-
-
-
-
-        // if(cell.classList[1] === "opponentPiece" && turn === "black") {
-        //     cell.classList.remove("opponentPiece")
-        //     turn = "red"
-        //     console.log("its red's turn now")
-        // }
-        // if(cell.firstElementChild.innerHTML == "X" || cell.firstElementChild.innerHTML == "O") {
-        //     console.log("this is working")
-        //     this.firstElementChild.style.boxShadow = "white 0 0 8px 4px"
-        //     console.log(this.firstElementChild)
-        //     availableMoves();
-        // }
-
-// class Piece {
-//     constructor(team, row, col) {
-//         this.team = team;
-//         this.row = row;
-//         this.col = col;
-//         this.king = false; //no one is a king at start, when true, more possible moves.
-//         this.selected = false; //will change to true upon click.
-//     }
-//     //Figures out legal moves for currently selected player.
-//     getPossibleMoves() {
-//         var possibleMoves = [];
-//         if (this.team === "B") { //check for possible black moves
-//             possibleMoves.push([this.row + 1, this.col - 1]);
-//             possibleMoves.push([this.row + 1, this.col + 1]);
-
-//         } else { //check for possible white moves
-//             possibleMoves.push([this.row - 1, this.col - 1]);
-//             possibleMoves.push([this.row - 1, this.col + 1]);
-//         }
-//     }
-// }
-  
-
-
-
-
-
-
-// function availableMoves() {
-//     for(let i=0; i < 32; i++) {
-//         if(greenCells[i].childElementCount === 0) {
-//             greenCells[i].style.border = "1px solid red"
-//         }
-//     }
-//     console.log(greenCells[6])
-//     console.log(greenCells[6].parentElement.rowIndex)
-//     console.log(greenCells[6].cellIndex)
-// }
-// cells[17].classList.remove("opponentPiece")
-// cells[24].classList.add("opponentPiece")
-
-
-// console.log(cells[17].classList)
-// console.log(cells[60].classList)
-// console.log(cells[5].cellIndex)
-
-// pieces.forEach(piece => {
-//     piece.addEventListener("click", moveSpace() {
-
-//     })
-// })
-// function moveSpace(evt) {
-//     availableCell = evt.target
-//     parent.removeChild(child);
-//     availableCell.appendChild(child)
-//     availableMoves()
-// }
-
+            //this function checks if the space you selected is a valid jump to make for the red game pieces
+function isValidPlayerJump(currentIndex, index) {
+    if((currentIndex - index === 14 && cells[index].classList.value === "greenSquare") || (currentIndex - index === 18 && cells[index].classList.value === "greenSquare")) {
+        console.log(true)
+        return true;
+    }
+}
+            //this function checks if the space you selected is a valid jump to make for the black game pieces  
+function isValidOpponentJump(currentIndex, index) {
+    if((currentIndex - index === -14 && cells[index].classList.value === "greenSquare") || (currentIndex - index === -18 && cells[index].classList.value === "greenSquare")) {
+        console.log(true);
+        return true;
+    }
+}
