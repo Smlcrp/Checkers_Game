@@ -18,21 +18,9 @@ let currentIndex;
 
 
 // this is my click event that allows you to select/deselect/move game pieces on your specific turn
-console.log(rows)
-console.log(rows[0].childNodes[3])
 cells.forEach((cell, index) => {
     cell.addEventListener("click", function() {
-        if(ifKingPlayer(index) && turn === "red" && moveFinished) {
-            cell.classList.remove("kingPiece");
-            cell.classList.remove("playerPiece");
-            moveFinished = false;
-            currentIndex = index;
-        }else if(ifKingPlayer(index) && turn === "red" && !moveFinished) {
-            if(validKingMovePlayer(currentIndex, index)) {
-                cell.classList.add("playerPiece");
-                cell.classList.add("kingPiece");
-            }
-        }else if(cell.classList[1] === "playerPiece" && turn === "red" && moveFinished) {
+        if(cell.classList[1] === "playerPiece" && turn === "red" && moveFinished) {
             cell.classList.remove('playerPiece')
             moveFinished = false;
             console.log(cell.classList)
@@ -76,7 +64,6 @@ cells.forEach((cell, index) => {
             if(becomeKingOpponent(index)) {
                 moveFinished = true;
                 cell.classList.add("kingPiece");
-                cell.classList[2].innerHTML = "O";
                 turn = "red";
             }else if(isValidOpponentMove(currentIndex, index)) {
                 console.log(index)
@@ -178,7 +165,8 @@ function becomeKingOpponent(index) {
 }
 
 function validKingMovePlayer(currentIndex, index) {
-    if((currentIndex - index === 7 && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === 9 && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === -7 && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === -9 && cells[index].classList[2].value == "kingPiece")) {
+    console.log(Math.abs(currentIndex - index))
+    if((Math.abs(currentIndex - index) === 7 && cells[index].classList[1].value == "kingPiece") || (Math.abs(currentIndex - index)=== 9 && cells[index].classList[1].value == "kingPiece") || (Math.abs(currentIndex - index) === -7 && cells[index].classList[1].value == "kingPiece") || (Math.abs(currentIndex - index) === -9 && cells[index].classList[1].value == "kingPiece")) {
         console.log(true);
         return true;
     }
