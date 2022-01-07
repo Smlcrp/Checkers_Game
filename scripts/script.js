@@ -14,6 +14,8 @@ let moveFinished = true;
 
 let currentIndex;
 
+// this is my click event that allows you to select/deselect/move game pieces on your specific turn
+
 cells.forEach((cell, index) => {
     cell.addEventListener("click", function() {
         if(cell.classList[1] === "playerPiece" && turn === "red" && moveFinished) {
@@ -32,7 +34,7 @@ cells.forEach((cell, index) => {
                 console.log(index)
             }else if(sameSquare(currentIndex, index)) {
                 cell.classList.add("playerPiece")
-                moveFinished = false;
+                moveFinished = true;
                 turn = "red";
             }
         }
@@ -51,7 +53,7 @@ cells.forEach((cell, index) => {
                 turn = "red";
             }else if(sameSquare(currentIndex, index)) {
                 cell.classList.add("opponentPiece")
-                moveFinished = false;
+                moveFinished = true;
                 turn = "black";
             }
         }
@@ -59,17 +61,18 @@ cells.forEach((cell, index) => {
 })
         
         
-           
+           //this function limits the spaces the red game pieces can move to to the green spaces diagonally in front of it 
 function isValidPlayerMove(currentIndex, index) {
     if((currentIndex - index === 7 && cells[index].classList.value !== "greenSquare playerPiece") || (currentIndex - index === 9 && cells[index].classList.value !== "greenSquare playerPiece")) {
+        // if(cells[index].classList.value == "greenSquare opponentPiece")
         console.log(true);
         return true;
-            }
-            
-            console.log(false)
-            return false;
-        }
+    }
+    console.log(false)
+    return false;
+}
 
+            //this function limits the spaces the black game pieces can move to to the green spaces diagonally in front of it 
 function isValidOpponentMove(currentIndex, index) {
     if((currentIndex - index === -7 && cells[index].classList.value !== "greenSquare opponentPiece") || (currentIndex - index === -9 && cells[index].classList.value !== "greenSquare opponentPiece")) {
         console.log(true);
@@ -78,12 +81,14 @@ function isValidOpponentMove(currentIndex, index) {
     console.log(false)
     return false;
 }
+
+            //this function allows you to deselect the selected game piece and select a new game piece
 function sameSquare(currentIndex, index) {
     if(currentIndex === index) {
         console.log(true);
         return true; 
-        }
     }
+}
        
 
 
