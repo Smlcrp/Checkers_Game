@@ -19,7 +19,7 @@ td {
     background-color: white;
 }
 
-.opponentPiece ,.playerPiece {
+.opponentPiece ,.playerPiece, .kingPiece {
     height: 40px;
     width: 40px;
     display: block;
@@ -33,4 +33,11 @@ td {
 
 .playerPiece {
     background-color: red;
+}
+
+.kingPiece {
+    background-image: "https://cdn4.iconfinder.com/data/icons/devices-gaming/24/crown-512.png"("kingCrown.gif");
+    background-color: gold;
+    border: red;
+    
 }
