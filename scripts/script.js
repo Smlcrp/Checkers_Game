@@ -17,7 +17,7 @@ let moveFinished = true;
 let currentIndex;
 
 
-// this is my click event that allows you to select/deselect/move game pieces on your specific turn
+// this is my click event that allows you to select/deselect/move/jump game pieces on your specific turn
 cells.forEach((cell, index) => {
     cell.addEventListener("click", function() {
         if(cell.classList[1] === "playerPiece" && turn === "red" && moveFinished) {
@@ -27,8 +27,6 @@ cells.forEach((cell, index) => {
             console.log(index)
             currentIndex = index;
         }else if(cell.classList[0] === "greenSquare" && turn === "red" && !moveFinished) {
-            // console.log(cells[index].classList)
-            // console.log(currentIndex)
             if(becomeKingPlayer(index)) {
                 moveFinished = true;
                 cell.classList.add("kingPiece");
@@ -131,7 +129,7 @@ function isValidOpponentJump(currentIndex, index) {
         return true;
     }
 }
-
+            //this function checks in the clicked player game piece is a king piece
 function ifKingPlayer(index) {
     if(cells[index].classList.value === "greenSquare kingPiece") {
         console.log(true);
@@ -140,13 +138,14 @@ function ifKingPlayer(index) {
     console.log(cells[index].classList.value);
     return false;
 }
+            //this function checks in the clicked opponent game piece is a king piece
 function ifKingOpponent(index) {
     if(cells[index].classList.value === "greenSquare opponentPiece kingPiece") {
         return true;
     }
     return false;
 }
-
+            //this function checks in the clicked player game piece can become a king piece
 function becomeKingPlayer(index) {
     if(index === 1 || index === 3 || index === 5 || index === 7) {
         console.log(true);
@@ -155,6 +154,7 @@ function becomeKingPlayer(index) {
     console.log(false);
     return false;
 }
+            //this function checks in the clicked opponent game piece can become a king piece
 function becomeKingOpponent(index) {
     if(index === 56 || index === 58 || index === 60 || index === 62) {
         console.log(true);
@@ -163,7 +163,7 @@ function becomeKingOpponent(index) {
     console.log(false);
     return false;
 }
-
+            //this function checks if the clicked space is a valid player king piece move
 function validKingMovePlayer(currentIndex, index) {
     console.log(Math.abs(currentIndex - index))
     if((Math.abs(currentIndex - index) === 7 && cells[index].classList[1].value == "kingPiece") || (Math.abs(currentIndex - index)=== 9 && cells[index].classList[1].value == "kingPiece") || (Math.abs(currentIndex - index) === -7 && cells[index].classList[1].value == "kingPiece") || (Math.abs(currentIndex - index) === -9 && cells[index].classList[1].value == "kingPiece")) {
@@ -173,7 +173,7 @@ function validKingMovePlayer(currentIndex, index) {
     console.log(false)
     return false;
 }
-
+            //this function checks if the clicked space is a valid opponent king piece move
 function validKingMoveOpponent(currentIndex, index) {
     if((currentIndex - index === 7 && cells[index].classList.value !== "greenSquare opponentPiece" && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === 9 && cells[index].classList.value !== "greenSquare opponentPiece" && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === -7 && cells[index].classList.value !== "greenSquare opponentPiece" && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === -9 && cells[index].classList.value !== "greenSquare opponentPiece" && cells[index].classList[2].value == "kingPiece")) {
         console.log(true);
@@ -182,7 +182,7 @@ function validKingMoveOpponent(currentIndex, index) {
     console.log(false)
     return false;
 }
-
+            //this function checks if the clicked space is a valid king piece jump
 function validKingJump(currentIndex, index) {
     if((currentIndex - index === 14 && cells[index].classList.value === "greenSquare" && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === 18 && cells[index].classList.value === "greenSquare" && cells[index].classList[2].value == "kingPiece") || (currentIndex - index === -14 && cells[index].classList.value === "greenSquare" && sKing) || (currentIndex - index === -18 && cells[index].classList.value === "greenSquare" && sKing)) {
         console.log(true)
